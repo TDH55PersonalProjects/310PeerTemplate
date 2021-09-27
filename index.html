@@ -17,5 +17,59 @@
     <input type="radio" name="operation" value="division" id="division"> Divide <br>
 
     <p id=result></p>
+    <script>
+        const getOperation = () => {
+        let operations = document.getElementsByName("operation");
+        for (i = 0; i < operations.length; i++) {
+            if (operations[i].checked) {
+            operation = operations[i].value;
+            return operation;
+            }
+        }
+        };
+
+        const printResult = () => {
+        let num1 = parseInt(document.getElementById("num1").value);
+        let num2 = parseInt(document.getElementById("num2").value);
+        let operation = getOperation();
+        let result;
+        const format = (num, decimals) =>
+            num.toLocaleString("en-US", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 4,
+            });
+        if (operation == "addition") {
+            result = num1 + num2;
+        } else if (operation == "subtraction") {
+            result = num1 - num2;
+        } else if (operation == "multiplication") {
+            result = num1 * num2;
+        } else if (operation == "division") {
+            if (num2 == 0) {
+            result = "undefined";
+            } else {
+            result = num1 / num2;
+            }
+        }
+        document.getElementById("result").textContent =
+            "The result is " + format(result);
+        };
+
+        document.getElementById("num1").addEventListener("change", printResult, true);
+        document.getElementById("num2").addEventListener("change", printResult, true);
+        document
+        .getElementById("addition")
+        .addEventListener("change", printResult, true);
+        document
+        .getElementById("subtraction")
+        .addEventListener("change", printResult, true);
+        document
+        .getElementById("multiplication")
+        .addEventListener("change", printResult, true);
+        document
+        .getElementById("division")
+        .addEventListener("change", printResult, true);
+
+    </script>
 </body>
 </html>
